@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Pacifico&display=swap"
       rel="stylesheet"
     />
     <link
@@ -21,38 +21,76 @@
       :root {
         --font-ar: 'Cairo', sans-serif;
         --font-en: 'Inter', sans-serif;
+        --primary-color: #003566;
+        --secondary-color: #FF6C0A;
+        --hero-bg-color: #0d2434;
       }
       body {
         font-family: var(--font-ar);
         scroll-behavior: smooth;
+        background-color: #f8fafc;
       }
       html[lang="en"] body {
         font-family: var(--font-en);
       }
-      .font-pacifico {
+       .font-pacifico {
         font-family: 'Pacifico', cursive;
-      }
-      .hero-bg {
-        background-color: #f8fafc;
       }
       .nav-link {
         position: relative;
         transition: color 0.3s ease;
+        padding-bottom: 4px;
       }
       .nav-link::after {
         content: '';
         position: absolute;
         width: 0;
         height: 2px;
-        bottom: -4px;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #FF6C0A;
+        background-color: var(--secondary-color);
         transition: width 0.3s ease;
       }
-      .nav-link:hover::after {
+      .nav-link:hover, .nav-link.active {
+        color: var(--secondary-color);
+      }
+      .nav-link:hover::after, .nav-link.active::after {
         width: 100%;
       }
+      
+      .hero-section {
+        background-color: var(--hero-bg-color);
+        background-image: url('assets/profile-imgs/bg1.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(1, 22, 39, 0.8);
+        z-index: 1;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-tag {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+      .hero-tag:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      
       .service-card, .tool-card, .brand-logo {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
@@ -60,23 +98,23 @@
         transform: translateY(-8px);
       }
        .service-card:hover, .tool-card:hover {
-         box-shadow: 0 10px 25px rgba(0, 53, 102, 0.1);
-       }
+        box-shadow: 0 10px 25px rgba(0, 53, 102, 0.1);
+      }
       .portfolio-item {
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease-in-out;
-        display: block; /* Ensure it's visible by default */
+        display: block;
       }
-       .portfolio-item.hidden {
-        transform: scale(0.8);
-        opacity: 0;
-        width: 0 !important;
-        height: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        overflow: hidden;
-        display: none; /* Hide completely */
+      .portfolio-item.hidden {
+       transform: scale(0.8);
+       opacity: 0;
+       width: 0 !important;
+       height: 0 !important;
+       padding: 0 !important;
+       margin: 0 !important;
+       overflow: hidden;
+       display: none;
       }
       .portfolio-overlay {
         position: absolute;
@@ -99,30 +137,13 @@
         opacity: 1;
         transform: translateY(0);
       }
-      input:focus,
-      textarea:focus {
-        border-color: #FF6C0A;
-        box-shadow: 0 0 0 3px rgba(255, 108, 10, 0.2);
-      }
-      .social-icon {
-        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-      }
-      .social-icon:hover {
-        transform: translateY(-3px);
-        background-color: #003566;
-        color: white;
-      }
-      .portfolio-filter-btn.active {
-        background-color: #003566;
-        color: white;
-      }
       .faq-answer {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
       }
       .faq-item.open .faq-answer {
-        max-height: 200px; /* Adjust as needed */
+        max-height: 200px;
         padding-top: 1rem;
       }
       .faq-item.open .faq-icon {
@@ -131,53 +152,40 @@
       .faq-icon {
         transition: transform 0.3s ease;
       }
-
-      /* Custom Tailwind Config */
-      .text-primary { color: #003566; }
-      .bg-primary { background-color: #003566; }
-      .border-primary { border-color: #003566; }
-      .text-secondary { color: #FF6C0A; }
-      .bg-secondary { background-color: #FF6C0A; }
-      .border-secondary { border-color: #FF6C0A; }
-      .hover\:bg-primary:hover { background-color: #003566; }
-      .hover\:text-primary:hover { color: #003566; }
-       .hover\:bg-secondary:hover { background-color: #FF6C0A; }
-       .contact-icon {color: #f2f0ee; /* استخدم أي لون تريده للأيقونات */}
+      .social-icon {
+        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+      }
+      .social-icon:hover {
+        transform: translateY(-3px);
+        background-color: var(--primary-color);
+        color: white;
+      }
 
       /* Directional Margin/Padding */
       html[dir="rtl"] .ml-3 { margin-right: 0.75rem; margin-left: 0; }
       html[dir="ltr"] .mr-3 { margin-left: 0.75rem; margin-right: 0; }
-       html[dir="rtl"] .me-2 { margin-left: 0.5rem; margin-right: 0;}
-       html[dir="ltr"] .me-2 { margin-right: 0.5rem; margin-left:0;}
-       html[dir="rtl"] .me-4 { margin-left: 1rem; margin-right: 0;}
-       html[dir="ltr"] .me-4 { margin-right: 1rem; margin-left:0;}
-       html[dir="rtl"] .text-start { text-align: right; }
-       html[dir="ltr"] .text-start { text-align: left; }
-
-      /* Testimonial Slider Fix */
-      #testimonials-container {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 100%;
-      }
-      .testimonial-slide {
-        flex: 0 0 100%; /* Ensures each slide takes full width in flex row */
-      }
-      /* IMPORTANT: Ensure the parent of #testimonials-container (the .overflow-hidden div) does NOT have a fixed width or restrict horizontal overflow. It should allow the flex row to work. */
+      html[dir="rtl"] .me-2 { margin-left: 0.5rem; margin-right: 0;}
+      html[dir="ltr"] .me-2 { margin-right: 0.5rem; margin-left:0;}
+      html[dir="rtl"] .me-4 { margin-left: 1rem; margin-right: 0;}
+      html[dir="ltr"] .me-4 { margin-right: 1rem; margin-left:0;}
+      html[dir="rtl"] .text-start { text-align: right; }
+      html[dir="ltr"] .text-start { text-align: left; }
+      html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-right: 1rem; margin-left: 0;}
+      html[dir="ltr"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-left: 1rem; margin-right: 0;}
     </style>
   </head>
-  <body class="bg-white text-gray-800">
+  <body>
     <!-- Navigation -->
     <nav class="fixed w-full bg-white bg-opacity-95 shadow-md z-50">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" class="flex items-center">
-          <img
-            src="assets/logos/tx_icon1.png"
+          <!-- <img
+            src="/https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/logos/tx_icon1.png"
             alt="TAYABX Logo"
             class="w-10 h-10 ml-3"
-            onerror="this.onerror=null; this.src='https://placehold.co/40x40/003566/ffffff?text=TX';"
-          />
-          <div class="font-pacifico text-primary text-2xl">TAYABX</div>
+            onerror="this.onerror=null; this.src='"
+          /> -->
+          <div class="font-pacifico text-primary text-2xl" data-key="logo">TAYABX</div>
         </a>
         <div class="hidden md:flex items-center gap-x-8">
           <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_about">من أنا</a>
@@ -187,12 +195,14 @@
           <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_blog">المدونة</a>
           <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_testimonials">آراء العملاء</a>
           <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_contact">تواصل معي</a>
-           <button id="lang-switcher" class="bg-primary text-white px-3 py-1 rounded-md text-sm font-semibold">EN</button>
         </div>
-        <div class="md:hidden flex items-center">
-          <button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-700">
-            <i class="ri-menu-line ri-lg"></i>
-          </button>
+        <div class="flex items-center gap-x-2">
+            <button id="lang-switcher" title="Change Language" class="flex items-center gap-2 text-gray-700 hover:text-secondary font-medium transition-colors p-2 rounded-lg hover:bg-gray-100">
+                <span id="lang-switcher-icon-container" class="w-6 h-4 block rounded-sm overflow-hidden"></span>
+            </button>
+            <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
         </div>
       </div>
       <!-- Mobile Menu -->
@@ -201,47 +211,36 @@
           <a href="#about" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_about_mobile">من أنا</a>
           <a href="#services" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_services_mobile">خدماتي</a>
           <a href="#portfolio" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_portfolio_mobile">أعمالي</a>
-           <a href="#tools" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_tools_mobile">الأدوات</a>
-           <a href="#blog" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_blog_mobile">المدونة</a>
+          <a href="#tools" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_tools_mobile">الأدوات</a>
+          <a href="#blog" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_blog_mobile">المدونة</a>
           <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_testimonials_mobile">آراء العملاء</a>
           <a href="#contact" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_contact_mobile">تواصل معي</a>
-          <button id="lang-switcher-mobile" class="bg-primary text-white px-3 py-2 rounded-md text-sm font-semibold mx-auto w-24">EN</button>
+          <hr class="my-2">
+          <button id="lang-switcher-mobile" class="text-gray-700 hover:text-primary font-medium py-2 w-full flex items-center justify-center gap-2">
+            <span id="lang-switcher-mobile-icon-container" class="w-6 h-4 block rounded-sm overflow-hidden"></span>
+            <span data-key="nav_switch_lang_mobile">تغيير اللغة</span>
+          </button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-bg pt-32 pb-0 md:pt-40">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center md:items-end gap-12">
-                <!-- Text Content -->
-                <div class="md:w-3/5 text-center md:text-start pb-20 md:pb-28">
-                    <p class="text-secondary font-semibold text-lg md:text-xl mb-4" data-key="hero_welcome">
-                        أهلاً بك في عالم TAYABX
-                    </p>
-                    <h1 class="text-primary text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" data-key="hero_title">
-                        أنا أحمد الطيب، مسوق رقمي أساعد العلامات التجارية على النمو
-                    </h1>
-                    <p class="text-gray-600 text-lg md:text-xl mb-10 max-w-2xl mx-auto md:mx-0" data-key="hero_subtitle">
-                        أركز على الاستراتيجية، التصميم، والنتائج عبر منصات التواصل الاجتماعي ومحركات البحث. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#portfolio" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-lg whitespace-nowrap" data-key="hero_cta1">
-                            شاهد أعمالي
-                        </a>
-                        <a href="#contact" class="bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-secondary hover:text-white transition-all shadow-lg whitespace-nowrap" data-key="hero_cta2">
-                            تواصل معي
-                        </a>
-                    </div>
-                </div>
-                <!-- Image -->
-                <div class="md:w-2/5 flex justify-center md:justify-end">
-                    <div class="relative w-80 h-96 md:w-96 md:h-[32rem]">
-                       <div class="absolute top-10 right-10 w-48 h-48 bg-purple-200 rounded-full opacity-50"></div>
-                       <div class="absolute bottom-10 left-10 w-24 h-24 bg-purple-200 rounded-full opacity-50"></div>
-                        <img src="assets/profile-imgs/re-tayab1.png" alt="Ahmed Eltyeb Khalifa" class="relative z-10 w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/400x500/e2e8f0/334155?text=Profile+Image';">
-                    </div>
-                </div>
+    <section id="hero" class="hero-section h-screen min-h-[700px] flex items-center justify-center text-center">
+        <div class="hero-content container mx-auto px-6 text-white">
+            <p class="text-secondary font-semibold text-lg md:text-xl mb-4" data-key="hero_welcome">
+                أهلاً بك في عالم TAYABX
+            </p>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight" data-key="hero_title">
+                أنا أحمد الطيب، مسوق رقمي ومصمم مواقع
+            </h1>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300" data-key="hero_subtitle">
+                أركز على الاستراتيجية، التصميم، والنتائج. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-3 md:gap-4">
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag1">تصميم مواقع وتطبيقات</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag2">تسويق إلكتروني</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag3">تحسين محركات البحث (SEO)</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag4">إدارة حسابات التواصل</span>
             </div>
         </div>
     </section>
@@ -260,7 +259,7 @@
           <div class="md:w-1/2 lg:w-5/12">
             <img
               src="assets/profile-imgs/tayab2.png"
-              alt="Ahmed Eltyeb Khalifa at work"
+              alt="Ahmed Eltyeb at work"
               class="rounded-xl shadow-2xl w-full h-auto object-cover"
               onerror="this.onerror=null; this.src='https://placehold.co/600x700/e2e8f0/334155?text=About+Image';"
             />
@@ -285,7 +284,7 @@
                 <span class="bg-gray-100 text-primary px-4 py-2 rounded-full font-medium" data-key="skill3">إعلانات جوجل</span>
                 <span class="bg-gray-100 text-primary px-4 py-2 rounded-full font-medium" data-key="skill4">تصميم الجرافيك</span>
                 <span class="bg-gray-100 text-primary px-4 py-2 rounded-full font-medium" data-key="skill5">Canva</span>
-                 <span class="bg-gray-100 text-primary px-4 py-2 rounded-full font-medium" data-key="skill6">Figma</span>
+                <span class="bg-gray-100 text-primary px-4 py-2 rounded-full font-medium" data-key="skill6">Figma</span>
               </div>
             </div>
           </div>
@@ -308,44 +307,44 @@
                 </div>
                 <!-- Tool 2 -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/Adobe-Lightroom.webp" alt="Adobe Lightroom" class="h-16 w-16 mb-4">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Adobe-Lightroom.webp" alt="Adobe Lightroom" class="h-16 w-16 mb-4">
                     <p class="font-semibold text-gray-700" data-key="tool_lr">Lightroom CC</p>
                 </div>
                  <!-- Tool 3 -->
-                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/Asana.webp" alt="Asana" class="h-16 w-16 mb-4 object-contain">
+                <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Asana.webp" alt="Asana" class="h-16 w-16 mb-4 object-contain">
                     <p class="font-semibold text-gray-700" data-key="tool_asana">Asana</p>
                 </div>
                 <!-- Tool 4 -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/cap.png" alt="CapCut" class="h-16 w-16 mb-4 object-contain">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/cap.png" alt="CapCut" class="h-16 w-16 mb-4 object-contain">
                     <p class="font-semibold text-gray-700" data-key="tool_capcut">Capcut</p>
                 </div>
                  <!-- Tool 5 -->
-                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/Semrush.png" alt="Semrush" class="h-16 w-24 mb-4 object-contain">
+                <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Semrush.png" alt="Semrush" class="h-16 w-24 mb-4 object-contain">
                     <p class="font-semibold text-gray-700" data-key="tool_semrush">Semrush</p>
                 </div>
                 <!-- Meta Business Suite -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/meta1.png" alt="Meta Business Suite" class="h-16 w-16 mb-4">
-                    <p class="font-semibold text-gray-700" data-key="tool_meta">Meta Business Suite</p>
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/meta1.png" alt="Meta Business Suite" class="h-16 w-16 mb-4">
+                    <p class="font-semibold text-gray-700 text-center" data-key="tool_meta">Meta Business Suite</p>
                 </div>
                 <!-- Google Ads -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/Google Ad.png" alt="Google Ads" class="h-16 w-16 mb-4">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Google%20Ad.png" alt="Google Ads" class="h-16 w-16 mb-4">
                     <p class="font-semibold text-gray-700" data-key="tool_google_ads">Google Ads</p>
                 </div>
 
                 <!-- Google Analytics 4 (GA4) -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/Google Analytics 4 (GA4).png" alt="Google Analytics 4" class="h-16 w-16 mb-4">
-                    <p class="font-semibold text-gray-700" data-key="tool_ga4">Google Analytics 4 (GA4)</p>
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Google%20Analytics%204%20(GA4).png" alt="Google Analytics 4" class="h-16 w-16 mb-4">
+                    <p class="font-semibold text-gray-700 text-center" data-key="tool_ga4">Google Analytics 4 (GA4)</p>
                 </div>
 
                 <!-- Trello -->
                 <div class="tool-card flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-md">
-                    <img src="assets/Tools-System-imgs/trello.webp" alt="Trello" class="h-16 w-16 mb-4">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/trello.webp" alt="Trello" class="h-16 w-16 mb-4">
                     <p class="font-semibold text-gray-700" data-key="tool_trello">Trello</p>
                 </div>
 
@@ -360,7 +359,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50">
+    <section id="services" class="py-20 bg-white">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2" data-key="services_title">خدماتي</h2>
@@ -474,7 +473,7 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-white">
+    <section id="portfolio" class="py-20 bg-gray-50">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2" data-key="portfolio_title">معرض أعمالي</h2>
@@ -492,7 +491,7 @@
         <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Item 1 (Design) -->
             <a href="https://alarabifalcons.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/alarabifalcons/alarabifalcons.png" alt="Al Arabi Falcons" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/alarabifalcons/alarabifalcons.png" alt="Al Arabi Falcons" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio1_title">تصميم موقع عقاري</h3>
                 <p class="text-gray-200" data-key="portfolio1_desc">DOWAN REAL GAMA ATE</p>
@@ -500,7 +499,7 @@
             </a>
             <!-- Item 2 (Design) -->
             <a href="https://linierfashion.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Linier Slocal Fashion Store/Linier Slocal Fashion Store11.jpg" alt="Linier Slocal" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Linier%20Slocal%20Fashion%20Store/Linier%20Slocal%20Fashion%20Store11.jpg" alt="Linier Slocal" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio2_title">تصميم متجر إلكتروني</h3>
                 <p class="text-gray-200" data-key="portfolio2_desc">Linier Slocal Fashion Store</p>
@@ -508,7 +507,7 @@
             </a>
             <!-- Item 3 (Marketing) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="marketing">
-                <img src="assets/project-imgs/FABESOIT CALEMBERS/FABESOIT CALEMBER3.jpg" alt="Content Calendar" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/FABESOIT%20CALEMBERS/FABESOIT%20CALEMBER3.jpg" alt="Content Calendar" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio3_title">خطة محتوى تسويقي</h3>
                 <p class="text-gray-200" data-key="portfolio3_desc">FABESOIT CALEMBERS</p>
@@ -516,7 +515,7 @@
             </a>
             <!-- Item 4 (Design) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/mobile app UIUX design/tencoffee1.png" alt="Retil Utles" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/mobile%20app%20UIUX%20design/tencoffee1.png" alt="Retil Utles" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio4_title">تصميم واجهة تطبيق</h3>
                 <p class="text-gray-200" data-key="portfolio4_desc">Retil Utles Mobile App</p>
@@ -524,7 +523,7 @@
             </a>
             <!-- Item 5 (Marketing) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="marketing">
-                <img src="assets/project-imgs/Google Analytics/alarabi-analysis.png" alt="Analytics Dashboard" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Google%20Analytics/alarabi-analysis.png" alt="Analytics Dashboard" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio5_title">تحليلات جوجل</h3>
                 <p class="text-gray-200" data-key="portfolio5_desc">لوحة تحكم الأداء</p>
@@ -532,7 +531,7 @@
             </a>
             <!-- Item 6 (Design) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/visual identity/tayabxbrand2.jpg" alt="Branding" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/visual%20identity/tayabxbrand2.jpg" alt="Branding" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio6_title">هوية بصرية</h3>
                 <p class="text-gray-200" data-key="portfolio6_desc">تصميم هوية بصرية متكاملة</p>
@@ -540,23 +539,23 @@
             </a>
              <!-- Item 7 (Marketing) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="marketing">
-                <img src="assets/project-imgs/Campagin-ads/meat-ads24.png" alt="Restaurant Campaign" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Campagin-ads/meat-ads24.png" alt="Restaurant Campaign" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio7_title">حملة سوشيال ميديا لمتجر صقور</h3>
                 <p class="text-gray-200" data-key="portfolio7_desc">زيادة الوعي بالعلامة التجارية وزيادة الطلبات</p>
                 </div>
             </a>
-             <!-- Item 8 (Design) -->
-             <a href="https://loofboutique.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Loof Boutique Website/8.png" alt="Loof Boutique" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+              <!-- Item 8 (Design) -->
+              <a href="https://loofboutique.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Loof%20Boutique%20Website/8.png" alt="Loof Boutique" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio8_title">موقع لمتجر أزياء نسائي</h3>
                 <p class="text-gray-200" data-key="portfolio8_desc">Loof Boutique</p>
                 </div>
             </a>
-             <!-- Item 9 (Design) -->
-             <a href="https://ammaralkhajeh.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Ammar Al Khajeh – Personal Website//Amar Al khaja.png" alt="Personal Brand" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+              <!-- Item 9 (Design) -->
+              <a href="https://ammaralkhajeh.com" target="_blank" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Ammar%20Al%20Khajeh%20%E2%80%93%20Personal%20Website/Amar%20Al%20khaja.png" alt="Personal Brand" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio9_title">موقع شخصي احترافي</h3>
                 <p class="text-gray-200" data-key="portfolio9_desc">Ammar Al Khajeh</p>
@@ -564,7 +563,7 @@
             </a>
             <!-- Item 10 (Design) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Bit Al Kndora/7.png" alt="Bait Al Kandora" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Bit%20Al%20Kndora/7.png" alt="Bait Al Kandora" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio10_title"></h3>
                 <p class="text-gray-200" data-key="portfolio10_desc"></p>
@@ -572,7 +571,7 @@
             </a>
             <!-- Item 11 (Design) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Gold-Signature-Tailor/9.png" alt="Gold Signature Tailor" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Gold-Signature-Tailor/9.png" alt="Gold Signature Tailor" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio11_title"></h3>
                 <p class="text-gray-200" data-key="portfolio11_desc"></p>
@@ -580,7 +579,7 @@
             </a>
             <!-- Item 12 (Design) -->
             <a href="#" class="portfolio-item rounded-lg overflow-hidden shadow-lg group block" data-category="design">
-                <img src="assets/project-imgs/Eitmam Domestic Worker/eitmam.png" alt="Eitmam Domestic Worker" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Eitmam%20Domestic%20Worker/eitmam.png" alt="Eitmam Domestic Worker" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-400" >
                 <div class="portfolio-overlay">
                 <h3 class="text-xl font-bold text-white mb-2" data-key="portfolio12_title"></h3>
                 <p class="text-gray-200" data-key="portfolio12_desc"></p>
@@ -590,25 +589,23 @@
       </div>
     </section>
 
-     <!-- Case Study Section -->
-    <section id="case-studies" class="py-20 bg-gray-50">
+     <section id="case-studies" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2" data-key="casestudy_title">دراسات حالة</h2>
                 <p class="text-gray-500 max-w-2xl mx-auto" data-key="casestudy_subtitle">تعمق في كيفية تحقيقنا للنجاح لعملائنا.</p>
             </div>
 
-            <!-- Case Study 1 -->
             <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg mb-12">
                 <div class="flex flex-col md:flex-row gap-8 md:gap-12">
                     <div class="md:w-1/3">
-                        <img src="assets/project-imgs/Digital/Case_Studies1.png" alt="Dowan Real Project" class="rounded-lg shadow-md w-full">
+                        <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/project-imgs/Digital/Case_Studies1.png" alt="Dowan Real Project" class="rounded-lg shadow-md w-full">
                     </div>
                     <div class="md:w-2/3 text-start">
                         <h3 class="text-2xl font-bold text-primary mb-4" data-key="case1_title">إعادة تصميم لمتجر عبايات فاخرة على الإنترنت</h3>
                         <div class="mb-6">
                             <h4 class="text-lg font-semibold mb-2" data-key="case_challenge">التحدي:</h4>
-                            <p class="text-gray-600" data-key="case1_challenge_desc">كا>كان العميل يعاني من موقع قديم لا يعكس فخامة عقاراته، مع تجربة مستخدم سيئة أدت إلى انخفاض عدد العملاء المحتملين..</p>
+                            <p class="text-gray-600" data-key="case1_challenge_desc">كان العميل يعاني من موقع قديم لا يعكس فخامة عقاراته، مع تجربة مستخدم سيئة أدت إلى انخفاض عدد العملاء المحتملين..</p>
                         </div>
                         <div class="mb-6">
                             <h4 class="text-lg font-semibold mb-2" data-key="case_solution">الحل:</h4>
@@ -618,14 +615,14 @@
                         <div>
                             <h4 class="text-lg font-semibold mb-2" data-key="case_result">النتيجة:</h4>
                              <div class="flex flex-wrap gap-4 text-center">
-                                <div class="bg-green-100 p-4 rounded-lg flex-1">
-                                    <p class="text-2xl font-bold text-green-700">+150%</p>
-                                    <p class="text-sm text-green-600" data-key="case1_result1">زيادة في العملاء المحتملين</p>
-                                </div>
-                                <div class="bg-blue-100 p-4 rounded-lg flex-1">
-                                    <p class="text-2xl font-bold text-blue-700">-50%</p>
-                                    <p class="text-sm text-blue-600" data-key="case1_result2">انخفاض في معدل الارتداد</p>
-                                </div>
+                                 <div class="bg-green-100 p-4 rounded-lg flex-1">
+                                     <p class="text-2xl font-bold text-green-700">+150%</p>
+                                     <p class="text-sm text-green-600" data-key="case1_result1">زيادة في العملاء المحتملين</p>
+                                 </div>
+                                 <div class="bg-blue-100 p-4 rounded-lg flex-1">
+                                     <p class="text-2xl font-bold text-blue-700">-50%</p>
+                                     <p class="text-sm text-blue-600" data-key="case1_result2">انخفاض في معدل الارتداد</p>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -634,8 +631,7 @@
         </div>
     </section>
 
-     <!-- Brands Section -->
-    <section id="brands" class="py-20 bg-white">
+     <section id="brands" class="py-20 bg-gray-50">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2" data-key="brands_title">
@@ -645,37 +641,30 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
             <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/Semrush.png" alt="Semrush" class="h-14 transition-all duration-300">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/Semrush.png" alt="Semrush" class="h-14 transition-all duration-300">
             </div>
-            <!-- <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/Fresenius Medical Care.png" alt="Fresenius Medical Care" class="h-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-            </div> -->
-             <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/shopfiy.png" alt="Shopee" class="h-12 transition-all duration-300">
+            <div class="brand-logo flex justify-center">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/shopfiy.png" alt="Shopee" class="h-12 transition-all duration-300">
             </div>
              <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/canva.jpeg" alt="Canva" class="h-12 transition-all duration-300">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/canva.jpeg" alt="Canva" class="h-12 transition-all duration-300">
             </div>
-         
-            <!-- Gold Signature -->
+        
             <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/gold.png" alt="Gold Signature" class="h-14 transition-all duration-300">
-            </div>
-
-            <!-- Al Arabi Falcons -->
-            <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/al-arabi-falcons1.png" alt="Al Arabi Falcons" class="h-14 transition-all duration-300">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/gold.png" alt="Gold Signature" class="h-14 transition-all duration-300">
             </div>
 
-            <!-- Loof Boutique -->
             <div class="brand-logo flex justify-center">
-                <img src="assets/Tools-System-imgs/loof.png" alt="Loof Boutique" class="h-14 transition-all duration-300">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/al-arabi-falcons1.png" alt="Al Arabi Falcons" class="h-14 transition-all duration-300">
+            </div>
+
+            <div class="brand-logo flex justify-center">
+                <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/Tools-System-imgs/loof.png" alt="Loof Boutique" class="h-14 transition-all duration-300">
             </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -683,7 +672,6 @@
                 <p class="text-gray-500 max-w-2xl mx-auto" data-key="faq_subtitle">إجابات للأسئلة الأكثر شيوعًا حول خدماتنا.</p>
             </div>
             <div id="faq-container" class="max-w-3xl mx-auto space-y-4">
-                <!-- FAQ Item 1 -->
                 <div class="faq-item border-b border-gray-200 pb-4">
                     <button class="faq-question w-full flex justify-between items-center text-start">
                         <h3 class="text-lg font-semibold text-gray-800" data-key="faq1_q">كم من الوقت يستغرق إكمال المشروع؟</h3>
@@ -693,8 +681,7 @@
                         <p class="text-gray-600" data-key="faq1_a">يعتمد الجدول الزمني على حجم المشروع وتعقيده. يستغرق تصميم موقع ويب بسيط عادةً من 2 إلى 4 أسابيع، بينما قد تستغرق المشاريع الأكبر وقتًا أطول. سنقدم لك جدولاً زمنياً مفصلاً بعد مناقشة متطلباتك.</p>
                     </div>
                 </div>
-                 <!-- FAQ Item 2 -->
-                <div class="faq-item border-b border-gray-200 pb-4">
+                 <div class="faq-item border-b border-gray-200 pb-4">
                     <button class="faq-question w-full flex justify-between items-center text-start">
                         <h3 class="text-lg font-semibold text-gray-800" data-key="faq2_q">كيف تحدد تكلفة خدماتك؟</h3>
                         <i class="ri-add-line faq-icon text-xl text-primary"></i>
@@ -703,8 +690,7 @@
                         <p class="text-gray-600" data-key="faq2_a">يتم تسعير كل مشروع بشكل فردي بناءً على نطاق العمل والخدمات المطلوبة. بعد جلستنا الاستشارية الأولية، سأقدم لك عرض أسعار مفصل وشفاف بالكامل.</p>
                     </div>
                 </div>
-                 <!-- FAQ Item 3 -->
-                <div class="faq-item border-b border-gray-200 pb-4">
+                 <div class="faq-item border-b border-gray-200 pb-4">
                     <button class="faq-question w-full flex justify-between items-center text-start">
                         <h3 class="text-lg font-semibold text-gray-800" data-key="faq3_q">هل تقدمون خدمات الدعم بعد إطلاق المشروع؟</h3>
                         <i class="ri-add-line faq-icon text-xl text-primary"></i>
@@ -717,7 +703,6 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section id="blog" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -725,27 +710,24 @@
                 <p class="text-gray-500 max-w-2xl mx-auto" data-key="blog_subtitle">أفكار ونصائح حول عالم التسويق الرقمي والتصميم.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog Post 1 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                    <img src="assets/blogs-imgs/نصائح-لتحسين-محركات-البحث-1.webp" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/blogs-imgs/%D9%86%D8%B5%D8%A7%D8%A6%D8%AD-%D9%84%D8%AA%D8%AD%D8%B3%D9%8A%D9%86-%D9%85%D8%AD%D8%B1%D9%83%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D8%AD%D8%AB-1.webp" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-primary mb-2" data-key="blog1_title">5 نصائح لتحسين ظهورك في جوجل</h3>
                         <p class="text-gray-600 text-sm mb-4" data-key="blog1_excerpt">تعرف على أهم الاستراتيجيات التي تساعدك على الوصول إلى صدارة نتائج البحث وجذب المزيد من الزوار المؤهلين.</p>
                         <a href="https://tayabx-digital.blogspot.com/2025/04/" target="_blank" class="font-semibold text-secondary hover:text-primary transition-colors" data-key="blog_readmore">اقرأ المزيد <i class="ri-arrow-left-line align-middle"></i></a>
                     </div>
                 </div>
-                <!-- Blog Post 2 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                    <img src="assets/blogs-imgs/visual-indentity.png" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/blogs-imgs/visual-indentity.png" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
                      <div class="p-6">
                         <h3 class="text-xl font-bold text-primary mb-2" data-key="blog2_title">أهمية الهوية البصرية لنجاحك</h3>
                         <p class="text-gray-600 text-sm mb-4" data-key="blog2_excerpt">الهوية البصرية ليست مجرد شعار، بل هي قصة علامتك التجارية. اكتشف كيف يمكن للتصميم الجيد أن يبني الثقة والولاء.</p>
                         <a href="https://tayabx-digital.blogspot.com/2025/06/blog-post_13.html" target="_blank" class="font-semibold text-secondary hover:text-primary transition-colors" data-key="blog_readmore">اقرأ المزيد <i class="ri-arrow-left-line align-middle"></i></a>
                     </div>
                 </div>
-                <!-- Blog Post 3 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                    <img src="assets/blogs-imgs/ahmed-eltyeb.png" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
+                    <img src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/blogs-imgs/ahmed-eltyeb.png" alt="Blog Post Image" class="w-full h-auto group-hover:scale-105 transition-transform duration-300">
                      <div class="p-6">
                         <h3 class="text-xl font-bold text-primary mb-2" data-key="blog3_title">كيف تختار منصة التواصل المناسبة؟</h3>
                         <p class="text-gray-600 text-sm mb-4" data-key="blog3_excerpt">هل تستخدم فيسبوك، انستغرام، أم تيك توك؟ دليلك لاختيار المنصة المثالية التي يتواجد عليها جمهورك المستهدف.</p>
@@ -756,7 +738,6 @@
         </div>
     </section>
     
-    <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 bg-primary">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -766,24 +747,20 @@
             <div class="relative max-w-4xl mx-auto">
                 <div class="overflow-hidden">
                     <div id="testimonials-container" class="flex transition-transform duration-500 ease-in-out">
-                         <!-- Testimonial Slides will be injected here -->
-                    </div>
+                         </div>
                 </div>
-                 <!-- Navigation -->
-                <button id="prev-testimonial" class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all">
+                 <button id="prev-testimonial" class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all">
                     <i class="ri-arrow-left-s-line"></i>
                 </button>
                 <button id="next-testimonial" class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/2 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all">
                     <i class="ri-arrow-right-s-line"></i>
                 </button>
                  <div id="testimonial-dots" class="flex justify-center mt-8 space-x-2">
-                    <!-- Dots will be generated by JS -->
-                </div>
+                     </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-6">
              <div class="text-center mb-16">
@@ -817,7 +794,7 @@
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center me-4 mt-1 flex-shrink-0">
-                                    <i class="ri-mail-line contact-icon ri-lg"></i>
+                                    <i class="ri-mail-line text-primary ri-lg"></i>
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-gray-800 mb-1" data-key="contact_email_label">البريد الإلكتروني</h4>
@@ -826,7 +803,7 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center me-4 mt-1 flex-shrink-0">
-                                    <i class="ri-whatsapp-line contact-icon ri-lg"></i>
+                                    <i class="ri-whatsapp-line text-primary ri-lg"></i>
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-gray-800 mb-1" data-key="contact_whatsapp_label">واتساب</h4>
@@ -835,7 +812,7 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center me-4 mt-1 flex-shrink-0">
-                                    <i class="ri-map-pin-line contact-icon ri-lg"></i>
+                                    <i class="ri-map-pin-line text-primary ri-lg"></i>
                                 </div>
                                 <div>
                                     <h4 class="text-lg font-semibold text-gray-800 mb-1" data-key="contact_location_label">الموقع</h4>
@@ -866,13 +843,13 @@
     <footer class="bg-primary py-12">
       <div class="container mx-auto px-6 text-center">
          <a href="#" class="flex items-center justify-center mb-4">
-          <img
-            src="assets/logos/tx_icon2.png"
+            <img
+            src="https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/logos/tx_icon2.png"
             alt="TAYABX Logo"
             class="w-10 h-10 ml-3"
             onerror="this.onerror=null; this.src='https://placehold.co/40x40/ffffff/003566?text=TX';"
           />
-          <div class="font-pacifico text-white text-2xl">TAYABX</div>
+          <div class="font-pacifico text-white text-2xl" data-key="logo_footer">TAYABX</div>
         </a>
         <p class="text-gray-300 mt-2 mb-6" data-key="footer_slogan">صياغة النجاح الرقمي</p>
         <p class="text-gray-400" data-key="footer_copyright">
@@ -882,7 +859,7 @@
     </footer>
 
     <script>
-  /*
+ /*
 ================================================================================================
 |                                                                                              |
 |   Language Translation & Site Scripts                                                      |
@@ -895,56 +872,54 @@
 const translations = {
     ar: {
         page_title: "TAYABX - صياغة النجاح الرقمي",
+        logo: "TAYABX",
+        logo_footer: "TAYABX",
         nav_about: "من أنا", nav_services: "خدماتي", nav_portfolio: "أعمالي", nav_blog: "المدونة", nav_testimonials: "آراء العملاء", nav_contact: "تواصل معي", nav_tools: "الأدوات",
         nav_about_mobile: "من أنا", nav_services_mobile: "خدماتي", nav_portfolio_mobile: "أعمالي", nav_blog_mobile: "المدونة", nav_testimonials_mobile: "آراء العملاء", nav_contact_mobile: "تواصل معي", nav_tools_mobile: "الأدوات",
-        hero_welcome: "أهلاً بك في عالم TAYABX", hero_title: "أنا أحمد الطيب، مسوق رقمي أساعد العلامات التجارية على النمو", hero_subtitle: "أركز على الاستراتيجية، التصميم، والنتائج عبر منصات التواصل الاجتماعي ومحركات البحث. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.", hero_cta1: "شاهد أعمالي", hero_cta2: "تواصل معي",
-        about_title: "من أنا؟", about_subtitle: "نظرة سريعة على خبراتي وشغفي في عالم التسويق الرقمي.", about_headline: "متخصص في التسويق الرقمي وتنمية العلامات التجارية", about_p1: "بخبرة تزيد عن 3 سنوات في المشهد الرقمي في الإمارات العربية المتحدة، ساعدت العديد من الشركات على تأسيس وجود قوي عبر الإنترنت. يجمع نهجي بين الاستراتيجيات القائمة على البيانات والتنفيذ الإبداعي لتقديم نتائج قابلة للقياس تتماشى مع أهداف العمل. كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات. كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات.", about_p2: "كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات.", about_expertise_title: "مجالات خبرتي:", skill1: "التسويق عبر السوشيال ميديا", skill2: "تحسين محركات البحث (SEO)", skill3: "إعلانات جوجل", skill4: "تصميم الجرافيك", skill5: "Canva", skill6: "Figma",
-        tools_title: "الأدوات والنظام", tools_subtitle: "أستخدم أحدث الأدوات والأنظمة لضمان أفضل النتائج.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush",
-        brands_title: "علامات تجارية تعاونت معها", brands_subtitle: "نفخر بالثقة التي منحنا إياها هؤلاء الشركاء المميزون.",
+        nav_switch_lang_mobile: "Change Language",
+
+        hero_welcome: "أهلاً بك في عالم TAYABX", 
+        hero_title: "أنا أحمد الطيب، مسوق رقمي ومصمم مواقع", 
+        hero_subtitle: "أركز على الاستراتيجية، التصميم، والنتائج. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.", 
+        hero_tag1: "تصميم مواقع وتطبيقات",
+        hero_tag2: "تسويق إلكتروني",
+        hero_tag3: "تحسين محركات البحث (SEO)",
+        hero_tag4: "إدارة حسابات التواصل",
+
+        about_title: "من أنا؟", about_subtitle: "نظرة سريعة على خبراتي وشغفي في عالم التسويق الرقمي.", about_headline: "متخصص في التسويق الرقمي وتنمية العلامات التجارية", about_p1: "بخبرة تزيد عن 3 سنوات في المشهد الرقمي في الإمارات العربية المتحدة، ساعدت العديد من الشركات على تأسيس وجود قوي عبر الإنترنت. يجمع نهجي بين الاستراتيجيات القائمة على البيانات والتنفيذ الإبداعي لتقديم نتائج قابلة للقياس تتماشى مع أهداف العمل.", about_p2: "كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات.", about_expertise_title: "مجالات خبرتي:", skill1: "التسويق عبر السوشيال ميديا", skill2: "تحسين محركات البحث (SEO)", skill3: "إعلانات جوجل", skill4: "تصميم الجرافيك", skill5: "Canva", skill6: "Figma",
+        
+        tools_title: "الأدوات والنظام", tools_subtitle: "أستخدم أحدث الأدوات والأنظمة لضمان أفضل النتائج.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush", tool_meta: "Meta Business Suite", tool_google_ads: "Google Ads", tool_ga4: "Google Analytics 4 (GA4)", tool_trello: "Trello", tool_figma: "Figma",
+        
         services_title: "خدماتي", services_subtitle: "حلول متكاملة لتحقيق أهدافك الرقمية وتعزيز حضورك على الإنترنت.", service1_title: "إعلانات السوشيال ميديا", service1_desc: "حملات استراتيجية عبر فيسبوك، انستغرام، تيك توك، ولينكدإن.", service1_f1: "استراتيجية خاصة بالمنصة", service1_f2: "تصميم إعلانات إبداعية", service1_f3: "تتبع الأداء", service2_title: "SEO و إعلانات جوجل", service2_desc: "تحسين ظهورك في البحث وجذب الزيارات المؤهلة.", service2_f1: "بحث وتحسين الكلمات المفتاحية", service2_f2: "إدارة حملات الدفع لكل نقرة", service2_f3: "تتبع التحويلات", service3_title: "العلامة التجارية والتصميم", service3_desc: "بناء هوية تجارية متماسكة وتصاميم احترافية.", service3_f1: "شعار ودليل العلامة التجارية", service3_f2: "رسومات وسائل التواصل", service3_f3: "مواد تسويقية", service4_title: "التسويق عبر البريد الإلكتروني", service4_desc: "بناء علاقات وزيادة التحويلات عبر حملات البريد الإلكتروني.", service4_f1: "استراتيجية وإعداد الحملات", service4_f2: "تصميم قوالب البريد", service4_f3: "تحليلات الأداء", service5_title: "تحليل زيارات الموقع", service5_desc: "الحصول على رؤى حول أداء موقعك وسلوك المستخدمين.", service5_f1: "إعداد Google Analytics", service5_f2: "تحليل رحلة المستخدم", service5_f3: "تحسين التحويل", service6_title: "استشارات التسويق الرقمي", service6_desc: "إرشادات الخبراء مع توصيات قابلة للتنفيذ لأهداف عملك.", service6_f1: "تطوير الاستراتيجية", service6_f2: "تحليل المنافسين", service6_f3: "إنشاء خارطة طريق",
-        portfolio_title: "معرض أعمالي", portfolio_subtitle: "مجموعة من المشاريع التي تعكس خبرتي في تحقيق نتائج استثنائية.", filter_all: "الكل", filter_design: "تصميم المواقع والتطبيقات", filter_marketing: "التسويق الإلكتروني", portfolio1_title: "العربي للصقور", portfolio1_desc: "تصميم وتطوير موقع إلكتروني", portfolio2_title: "تصميم متجر إلكتروني", portfolio2_desc: "Linier Slocal Fashion Store", portfolio3_title: "خطة محتوى تسويقي", portfolio3_desc: "FABESOIT CALEMBERS", portfolio4_title: "تصميم واجهة تطبيق", portfolio4_desc: "Retil Utles Mobile App", portfolio5_title: "تحليلات جوجل", portfolio5_desc: "لوحة تحكم الأداء", portfolio6_title: "هوية بصرية", portfolio6_desc: "تصميم هوية بصرية متكاملة", portfolio7_title: "حملة سوشيال ميديا لمتجر الصقور", portfolio7_desc: "زيادة الوعي بالعلامة التجارية وزيادة الطلبات", portfolio8_title: "موقع لمتجر أزياء نسائي", portfolio8_desc: "Loof Boutique", portfolio9_title: "موقع شخصي احترافي", portfolio9_desc: "Ammar Al Khajeh",
-        portfolio10_title: "بيت الكندورة", portfolio10_desc: "استكشف مجموعتنا الحصرية من الكندورة والجبة والدشداشة. كندورة وجبة ودشداشة أنيقة وعالية الجودة لكل مناسبة.",
-        portfolio11_title: "خياط التوقيع الذهبي", portfolio11_desc: "تصميم وتفصيل حسب الطلب",
-        portfolio12_title: "مركز إتمام للعمالة المنزلية", portfolio12_desc: "نستقدم عاملات منزليات مدربات ومؤهلات من جميع البلدان المرخصة. نلبي احتياجاتك المختلفة على أعلى مستوى.",
-        casestudy_title: "دراسات حالة", casestudy_subtitle: "تعمق في كيفية تحقيقنا للنجاح لعملائنا.", case1_title: "إعادة تصميم موقع لشركة عقارية", case_challenge: "التحدي:", case1_challenge_desc: "كان العميل يعاني من موقع قديم لا يعكس فخامة عقاراته، مع تجربة مستخدم سيئة أدت إلى انخفاض عدد العملاء المحتملين..", case_solution: "الحل:", case1_solution_desc: "قمنا بإعادة تصميم كاملة للموقع مع التركيز على تجربة المستخدم (UX) وتصميم واجهة (UI) عصرية وفاخرة، بالإضافة إلى تحسين الموقع لمحركات البحث (SEO) لزيادة الظهور.", case_result: "النتيجة:", case1_result1: "زيادة في العملاء المحتملين", case1_result2: "انخفاض في معدل الارتداد",
-        faq_title: "أسئلة شائعة", faq_subtitle: "إجابات للأسئلة الأكثر شيوعًا حول خدماتنا.", faq1_q: "كم من الوقت يستغرق إكمال المشروع؟", faq1_a: "يعتمد الجدول الزمني على حجم المشروع وتعقيده. يستغرق تصميم موقع ويب بسيط عادةً من 2 إلى 4 أسابيع، بينما قد تستغرق المشاريع الأكبر وقتًا أطول. سنقدم لك جدولاً زمنياً مفصلاً بعد مناقشة متطلباتك.", faq2_q: "كيف تحدد تكلفة خدماتك؟", faq2_a: "يتم تسعير كل مشروع بشكل فردي بناءً على نطاق العمل والخدمات المطلوبة. بعد جلستنا الاستشارية الأولية، سأقدم لك عرض أسعار مفصل وشفاف بالكامل.", faq3_q: "هل تقدمون خدمات الدعم بعد إطلاق المشروع؟", faq3_a: "نعم، نحن نقدم باقات صيانة ودعم مستمرة لضمان بقاء موقعك وتطبيقاتك محدثة وآمنة وتعمل على النحو الأمثل. يمكننا مناقشة هذه الخيارات لتناسب احتياجاتك.",
-        blog_title: "أحدث المقالات", blog_subtitle: "أفكار ونصائح حول عالم التسويق الرقمي والتصميم.", blog1_title: "5 نصائح لتحسين ظهورك في جوجل", blog1_excerpt: "تعرف على أهم الاستراتيجيات التي تساعدك على الوصول إلى صدارة نتائج البحث وجذب المزيد من الزوار المؤهلين.", blog2_title: "أهمية الهوية البصرية لنجاحك", blog2_excerpt: "الهوية البصرية ليست مجرد شعار، بل هي قصة علامتك التجارية. اكتشف كيف يمكن للتصميم الجيد أن يبني الثقة والولاء.", blog3_title: "كيف تختار منصة التواصل المناسبة؟", blog3_excerpt: "هل تستخدم فيسبوك، انستغرام، أم تيك توك؟ دليلك لاختيار المنصة المثالية التي يتواجد عليها جمهورك المستهدف.", blog_readmore: "اقرأ المزيد",
-        testimonials_title: "ماذا يقول عملائي؟", testimonials_subtitle: "شهادات تعكس الثقة والنتائج التي نحققها معًا.",
-        testimonial1_text: "لقد ساعدنا فريق TAYABX في بناء متجر إلكتروني متكامل يعكس هوية علامتنا الراقية. التصميم كان عصريًا، والتجربة سلسة، والدعم الفني لا مثيل له. لاحظنا زيادة واضحة في المبيعات بعد تفعيل استراتيجيات التسويق الخاصة بهم.", testimonial1_name: "فريق Bait Al Kandora", testimonial1_title: "بيت الكندورة",
-        testimonial2_text: "كنا بحاجة إلى موقع سريع وجذاب يبرز منتجاتنا بتجربة مستخدم ممتازة، وTAYABX قدموا لنا ذلك وأكثر. أشكرهم على احترافيتهم العالية والتزامهم بالمواعيد.", testimonial2_name: "إدارة Headphone Store", testimonial2_title: "متجر سماعات",
-        testimonial3_text: "من خلال الموقع الجديد ونظام الحجز المخصص، أصبح لدينا طريقة سهلة واحترافية للتواصل مع عملائنا. التسويق الإلكتروني الذي نفذوه عزز من ظهورنا في محركات البحث وزاد من عدد الحجوزات.", testimonial3_name: "Gold Signature Tailor", testimonial3_title: "خياط التوقيع الذهبي",
-        testimonial4_text: "تصميم أنيق، وتجربة تسوق متكاملة عبر الإنترنت. TAYABX عرفوا تمامًا كيف يعبرون عن ذوق علامتنا النسائية من خلال تصميم موقع فريد مدعوم بخطة تسويقية ذكية.", testimonial4_name: "Loof Boutique", testimonial4_title: "لووف بوتيك",
-        testimonial5_text: "بفضل TAYABX، أصبح موقعي الشخصي يعكس هويتي المهنية بأسلوب عصري. الموقع مصمم باحتراف، وسهل الاستخدام، وساعدني في بناء حضور رقمي قوي.", testimonial5_name: "عمار الخاجة", testimonial5_title: "موقع شخصي",
-        testimonial6_text: "احتجنا إلى منصة موثوقة لتنظيم خدمات العمالة المنزلية، وTAYABX قدموا لنا موقعًا متكاملًا يدعم عدة لغات وقواعد بيانات قوية، مع تسويق فعّال جعله يصل إلى جمهورنا المستهدف.", testimonial6_name: "إدارة إتمام", testimonial6_title: "إتمام للعمالة المنزلية",
-        testimonial7_text: "نعمل مع TAYABX في حملاتنا التسويقية الرقمية، وكانت النتائج مذهلة! المحتوى جذاب، والإعلانات مدروسة، واستراتيجيات النمو فعالة ومبنية على تحليل دقيق للجمهور والسوق.", testimonial7_name: "قسم التسويق", testimonial7_title: "صقور العربي (حاليًا)",
-        contact_title: "تواصل معي", contact_subtitle: "هل لديك مشروع؟ لنبدأ الحديث. أنا هنا لمساعدتك على تحقيق أهدافك.", contact_form_title: "أرسل رسالة", contact_name: "اسمك", contact_name_ph: "مثال: جون دو", contact_email: "بريدك الإلكتروني", contact_email_ph: "مثال: john@example.com", contact_message: "رسالتك", contact_message_ph: "أخبرني عن مشروعك...", contact_submit_btn: "إرسال الرسالة", contact_info_title: "معلومات الاتصال", contact_email_label: "البريد الإلكتروني", contact_whatsapp_label: "واتساب", contact_location_label: "الموقع", contact_location: "دبي، الإمارات العربية المتحدة", contact_social_title: "تابعني على",
+        
+        portfolio_title: "معرض أعمالي", portfolio_subtitle: "مجموعة من المشاريع التي تعكس خبرتي في تحقيق نتائج استثنائية.", filter_all: "الكل", filter_design: "تصميم المواقع والتطبيقات", filter_marketing: "التسويق الإلكتروني",
+        
         footer_slogan: "صياغة النجاح الرقمي", footer_copyright: "© 2025 TAYABX. جميع الحقوق محفوظة."
     },
     en: {
         page_title: "TAYABX - Crafting Digital Success",
+        logo: "TAYABX",
+        logo_footer: "TAYABX",
         nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio", nav_blog: "Blog", nav_testimonials: "Testimonials", nav_contact: "Contact", nav_tools: "Tools",
         nav_about_mobile: "About", nav_services_mobile: "Services", nav_portfolio_mobile: "Portfolio", nav_blog_mobile: "Blog", nav_testimonials_mobile: "Testimonials", nav_contact_mobile: "Contact", nav_tools_mobile: "Tools",
-        hero_welcome: "Welcome to the world of TAYABX", hero_title: "I'm Ahmed Eltyeb, a Digital Marketer Helping Brands Grow", hero_subtitle: "Focused on strategy, design & results across social platforms and search engines. Transforming digital presence into measurable business growth.", hero_cta1: "View My Work", hero_cta2: "Contact Me",
+        nav_switch_lang_mobile: "Switch Language",
+
+        hero_welcome: "Welcome to the world of TAYABX", 
+        hero_title: "I'm Ahmed Eltyeb, a Digital Marketer & Web Designer", 
+        hero_subtitle: "Focused on strategy, design & results. Transforming your digital presence into measurable business growth.", 
+        hero_tag1: "Web & App Design",
+        hero_tag2: "Digital Marketing",
+        hero_tag3: "Search Engine Optimization (SEO)",
+        hero_tag4: "Social Media Management",
+
         about_title: "Who I Am", about_subtitle: "A quick look at my experience and passion in the world of digital marketing.", about_headline: "Digital Marketing & Brand Growth Specialist", about_p1: "With over 3 years of experience in the UAE's digital landscape, I have helped numerous businesses establish a strong online presence. My approach combines data-driven strategies with creative execution to deliver measurable results that align with business goals.", about_p2: "As the founder of TAYABX, I work closely with clients to understand their unique challenges and develop customized digital marketing solutions that drive growth, engagement, and conversions.", about_expertise_title: "My Expertise:", skill1: "Social Media Marketing", skill2: "Search Engine Optimization (SEO)", skill3: "Google Ads", skill4: "Graphic Design", skill5: "Canva", skill6: "Figma",
-        tools_title: "Tools & System", tools_subtitle: "I use the latest tools and systems to ensure the best results.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush",
-        brands_title: "Brands I've Collaborated With", brands_subtitle: "We are proud of the trust given to us by these distinguished partners.",
+        
+        tools_title: "Tools & System", tools_subtitle: "I use the latest tools and systems to ensure the best results.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush", tool_meta: "Meta Business Suite", tool_google_ads: "Google Ads", tool_ga4: "Google Analytics 4 (GA4)", tool_trello: "Trello", tool_figma: "Figma",
+        
         services_title: "My Services", services_subtitle: "Integrated solutions to achieve your digital goals and enhance your online presence.", service1_title: "Social Media Advertising", service1_desc: "Strategic campaigns across Facebook, Instagram, TikTok, and LinkedIn.", service1_f1: "Platform-specific strategy", service1_f2: "Creative ad design", service1_f3: "Performance tracking", service2_title: "SEO & Google Ads", service2_desc: "Improve your search visibility and drive qualified traffic.", service2_f1: "Keyword research & optimization", service2_f2: "PPC campaign management", service2_f3: "Conversion tracking", service3_title: "Branding & Creative Design", service3_desc: "Build a cohesive brand identity with professional designs.", service3_f1: "Logo & brand guidelines", service3_f2: "Social media graphics", service3_f3: "Marketing collateral", service4_title: "Email Marketing", service4_desc: "Build relationships and drive conversions with strategic email campaigns.", service4_f1: "Campaign strategy & setup", service4_f2: "Email template design", service4_f3: "Performance analytics", service5_title: "Website Traffic Analysis", service5_desc: "Gain insights into your website performance and user behavior.", service5_f1: "Google Analytics setup", service5_f2: "User journey mapping", service5_f3: "Conversion optimization", service6_title: "Digital Marketing Consultation", service6_desc: "Expert guidance on your digital marketing strategy with actionable recommendations.", service6_f1: "Strategy development", service6_f2: "Competitive analysis", service6_f3: "Marketing roadmap creation",
-        portfolio_title: "My Portfolio", portfolio_subtitle: "A collection of projects reflecting my expertise in achieving exceptional results.", filter_all: "All", filter_design: "Web & App Design", filter_marketing: "Digital Marketing", portfolio1_title: "Al Arabi Falcons Website", portfolio1_desc: "Website Design and Development", portfolio2_title: "E-commerce Store Design", portfolio2_desc: "Linier Slocal Fashion Store", portfolio3_title: "Content Marketing Plan", portfolio3_desc: "FABESOIT CALEMBERS", portfolio4_title: "Mobile App UI Design", portfolio4_desc: "Retil Utles Mobile App", portfolio5_title: "Google Analytics", portfolio5_desc: "Performance Dashboard", portfolio6_title: "Brand Identity", portfolio6_desc: "Full brand identity design", portfolio7_title: "Falcons Store Social Media Campaign", portfolio7_desc: "Brand awareness and order generation", portfolio8_title: "Women's Fashion Store Website", portfolio8_desc: "Loof Boutique", portfolio9_title: "Professional Personal Website", portfolio9_desc: "Ammar Al Khajeh",
-        portfolio10_title: "Bait Al Kandora", portfolio10_desc: "Explore our exclusive collection of kandura, jubbah or dishdasas. Stylish and high-quality kandura, jubbah or dishdasas for every occasion.",
-        portfolio11_title: "Gold Signature Tailor", portfolio11_desc: "Custom tailoring and design.",
-        portfolio12_title: "Eitmam Domestic Worker Center", portfolio12_desc: "We bring trained and qualified domestic workers from all licensed countries. We meet your different needs at the highest level.",
-        casestudy_title: "Case Studies", casestudy_subtitle: "A deep dive into how we achieve success for our clients.", case1_title: "Website Redesign for a Real Estate Company", case_challenge: "The Challenge:", case1_challenge_desc: "The client had an outdated website that didn't reflect the luxury of their properties, with a poor user experience leading to low lead generation.", case_solution: "The Solution:", case1_solution_desc: "We conducted a complete website redesign focusing on a modern and luxurious UI/UX, along with SEO optimization to increase visibility.", case_result: "The Result:", case1_result1: "Increase in Leads", case1_result2: "Decrease in Bounce Rate",
-        faq_title: "Frequently Asked Questions", faq_subtitle: "Answers to the most common questions about our services.", faq1_q: "How long does a project take to complete?", faq1_a: "The timeline depends on the project's scope and complexity. A simple website design typically takes 2-4 weeks, while larger projects may take longer. We'll provide a detailed timeline after discussing your requirements.", faq2_q: "How do you determine the cost of your services?", faq2_a: "Each project is priced individually based on the scope of work and services required. After our initial consultation, I will provide you with a detailed and fully transparent quote.", faq3_q: "Do you offer support services after the project is launched?", faq3_a: "Yes, we offer ongoing maintenance and support packages to ensure your website and applications stay updated, secure, and perform optimally. We can discuss these options to fit your needs.",
-        blog_title: "Latest Articles", blog_subtitle: "Insights and tips on the world of digital marketing and design.", blog1_title: "5 Tips to Improve Your Google Ranking", blog1_excerpt: "Learn the most important strategies to help you reach the top of search results and attract more qualified visitors.", blog2_title: "The Importance of Visual Identity for Your Success", blog2_excerpt: "A visual identity is more than just a logo; it's your brand's story. Discover how good design can build trust and loyalty.", blog3_title: "How to Choose the Right Social Media Platform?", blog3_excerpt: "Should you use Facebook, Instagram, or TikTok? Your guide to choosing the perfect platform where your target audience is.", blog_readmore: "Read More",
-        testimonials_title: "What My Clients Say", testimonials_subtitle: "Testimonials that reflect the trust and results we achieve together.",
-        testimonial1_text: "The TAYABX team helped us build an integrated e-commerce store that reflects our high-end brand identity. The design was modern, the experience was seamless, and the technical support was unparalleled. We noticed a clear increase in sales after activating their marketing strategies.", testimonial1_name: "Bait Al Kandora Team", testimonial1_title: "Bait Al Kandora",
-        testimonial2_text: "We needed a fast and attractive site that highlights our products with an excellent user experience, and TAYABX delivered that and more. I thank them for their high professionalism and commitment to deadlines.", testimonial2_name: "Headphone Store Management", testimonial2_title: "Headphone Store",
-        testimonial3_text: "Through the new website and custom booking system, we now have an easy and professional way to communicate with our customers. The digital marketing they implemented boosted our search engine visibility and increased bookings.", testimonial3_name: "Gold Signature Tailor", testimonial3_title: "Gold Signature Tailor",
-        testimonial4_text: "An elegant design and an integrated online shopping experience. TAYABX knew exactly how to express our women's brand's taste through a unique site design backed by a smart marketing plan.", testimonial4_name: "Loof Boutique", testimonial4_title: "Loof Boutique",
-        testimonial5_text: "Thanks to TAYABX, my personal website now reflects my professional identity in a modern style. The site is professionally designed, easy to use, and has helped me build a strong digital presence.", testimonial5_name: "Ammar Al Khajeh", testimonial5_title: "Personal Website",
-        testimonial6_text: "We needed a reliable platform to organize domestic worker services, and TAYABX provided us with an integrated site that supports multiple languages and a robust database, with effective marketing that reached our target audience.", testimonial6_name: "Eitmam Management", testimonial6_title: "Eitmam Domestic Worker",
-        testimonial7_text: "We are working with TAYABX on our digital marketing campaigns, and the results have been amazing! The content is engaging, the ads are well-thought-out, and the growth strategies are effective and based on a thorough analysis of the audience and market.", testimonial7_name: "Marketing Department", testimonial7_title: "Al Arabi Falcons (Current)",
-        contact_title: "Get In Touch", contact_subtitle: "Have a project? Let's talk. I'm here to help you achieve your goals.", contact_form_title: "Send a Message", contact_name: "Your Name", contact_name_ph: "e.g., John Doe", contact_email: "Your Email", contact_email_ph: "e.g., john@example.com", contact_message: "Your Message", contact_message_ph: "Tell me about your project...", contact_submit_btn: "Send Message", contact_info_title: "Contact Information", contact_email_label: "Email", contact_whatsapp_label: "WhatsApp", contact_location_label: "Location", contact_location: "Dubai, United Arab Emirates", contact_social_title: "Follow Me",
+        
+        portfolio_title: "My Portfolio", portfolio_subtitle: "A collection of projects reflecting my expertise in achieving exceptional results.", filter_all: "All", filter_design: "Web & App Design", filter_marketing: "Digital Marketing",
+
         footer_slogan: "Crafting Digital Success", footer_copyright: "© 2025 TAYABX. All rights reserved."
     }
 };
@@ -970,13 +945,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const langSwitchers = [document.getElementById('lang-switcher'), document.getElementById('lang-switcher-mobile')];
     const htmlEl = document.documentElement;
 
+    const uaeFlagSVG = `<svg class="w-full h-full" viewBox="0 0 21 15" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M0 0h21v15H0z" fill="#FFF"/><path d="M0 5h21v5H0z" fill="#000"/><path d="M0 0h21v5H0z" fill="#00732F"/><path d="M0 0h7v15H0z" fill="#F00"/></g></svg>`;
+    const usFlagSVG = `<svg class="w-full h-full" viewBox="0 0 72 48" xmlns="http://www.w3.org/2000/svg"><path fill="#b22234" d="M0 0h72v48H0z"/><path fill="#fff" d="M0 8h72v8H0zm0 16h72v8H0zm0 16h72v8H0z"/><path fill="#3c3b6e" d="M0 0h36v24H0z"/><path fill="#fff" d="m6 4 1.3 4H12l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L2 8h4.7zm12 0 1.3 4H24l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L14 8h4.7zm12 0 1.3 4H36l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L26 8h4.7zM6 12l1.3 4H12l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L2 16h4.7zm12 0 1.3 4H24l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L14 16h4.7zm12 0 1.3 4H36l-3.3 2.5 1.2 4-3.4-2.4-3.4 2.4 1.2-4L26 16h4.7z"/></svg>`;
+
     const setLanguage = (lang) => {
         htmlEl.setAttribute("lang", lang);
         htmlEl.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
         updateTranslations(lang);
-        langSwitchers.forEach(switcher => {
-            if (switcher) switcher.innerText = lang === "ar" ? "EN" : "AR";
-        });
+        
+        const langIconContainer = document.getElementById('lang-switcher-icon-container');
+        const langIconMobileContainer = document.getElementById('lang-switcher-mobile-icon-container');
+        
+        const iconToShow = lang === 'ar' ? usFlagSVG : uaeFlagSVG;
+
+        if (langIconContainer) langIconContainer.innerHTML = iconToShow;
+        if (langIconMobileContainer) langIconMobileContainer.innerHTML = iconToShow;
+
         localStorage.setItem("language", lang);
     };
     
@@ -1008,7 +992,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    const mobileLinks = mobileMenu.querySelectorAll("a");
+    const mobileLinks = mobileMenu.querySelectorAll("#mobile-menu a, #mobile-menu button");
     mobileLinks.forEach(link => {
         link.addEventListener("click", () => {
             mobileMenu.classList.add("hidden");
@@ -1035,101 +1019,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.addEventListener("DOMContentLoaded", function () {
         const testimonialsContainer = document.getElementById("testimonials-container");
         if(testimonialsContainer){
-            const prevButton = document.getElementById("prev-testimonial");
-            const nextButton = document.getElementById("next-testimonial");
-            const dotsContainer = document.getElementById("testimonial-dots");
-            
-            const testimonialsData = [
-                { textKey: 'testimonial1_text', nameKey: 'testimonial1_name', titleKey: 'testimonial1_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=BK' },
-                { textKey: 'testimonial2_text', nameKey: 'testimonial2_name', titleKey: 'testimonial2_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=HS' },
-                { textKey: 'testimonial3_text', nameKey: 'testimonial3_name', titleKey: 'testimonial3_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=GS' },
-                { textKey: 'testimonial4_text', nameKey: 'testimonial4_name', titleKey: 'testimonial4_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=LB' },
-                { textKey: 'testimonial5_text', nameKey: 'testimonial5_name', titleKey: 'testimonial5_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=AK' },
-                { textKey: 'testimonial6_text', nameKey: 'testimonial6_name', titleKey: 'testimonial6_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=ED' },
-                { textKey: 'testimonial7_text', nameKey: 'testimonial7_name', titleKey: 'testimonial7_title', avatar: 'https://placehold.co/100x100/ffffff/333333?text=AF' }
-            ];
-
-            testimonialsData.forEach(item => {
-                const slide = document.createElement('div');
-                slide.className = 'testimonial-slide w-full flex-shrink-0 px-4';
-                slide.innerHTML = `
-                    <div class="bg-white bg-opacity-10 p-8 rounded-lg text-center">
-                        <i class="ri-double-quotes-l text-secondary text-5xl mb-4 inline-block"></i>
-                        <p class="text-white text-lg italic mb-6" data-key="${item.textKey}"></p>
-                        <div class="flex items-center justify-center">
-                            <img src="${item.avatar}" alt="Client" class="w-12 h-12 rounded-full object-cover ml-4">
-                            <div>
-                                <h4 class="text-white font-semibold" data-key="${item.nameKey}"></h4>
-                                <p class="text-gray-300 text-sm" data-key="${item.titleKey}"></p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                testimonialsContainer.appendChild(slide);
-            });
-            // Update translations for testimonials after slides are created
-            const lang = document.documentElement.getAttribute('lang') || 'ar';
-            updateTranslations(lang);
-            
-            const slides = document.querySelectorAll(".testimonial-slide");
-            const slideCount = slides.length;
-            let currentIndex = 0;
-
-            // Generate dots
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < slideCount; i++) {
-                const dot = document.createElement("button");
-                dot.classList.add("testimonial-dot", "w-3", "h-3", "rounded-full", "bg-white", "bg-opacity-30");
-                dot.dataset.index = i;
-                dotsContainer.appendChild(dot);
-            }
-            
-            const dots = document.querySelectorAll(".testimonial-dot");
-
-
-            function goToSlide(index) {
-                const isRtl = document.documentElement.getAttribute('dir') === 'rtl';
-                currentIndex = (index + slideCount) % slideCount;
-                const transformValue = isRtl ? currentIndex * 100 : -currentIndex * 100;
-                testimonialsContainer.style.transform = `translateX(${transformValue}%)`;
-                updateDots();
-            }
-
-            function updateDots() {
-                dots.forEach((dot, index) => {
-                    if (index === currentIndex) {
-                        dot.classList.add("bg-opacity-50");
-                        dot.classList.remove("bg-opacity-30");
-                    } else {
-                        dot.classList.remove("bg-opacity-50");
-                        dot.classList.add("bg-opacity-30");
-                    }
-                });
-            }
-
-            if(prevButton && nextButton && dots.length > 0) {
-              prevButton.addEventListener("click", () => goToSlide(currentIndex - 1));
-              nextButton.addEventListener("click", () => goToSlide(currentIndex + 1));
-
-              dots.forEach((dot) => {
-                  dot.addEventListener("click", (e) => {
-                      goToSlide(parseInt(e.target.dataset.index));
-                  });
-              });
-              
-               let autoSlideInterval = setInterval(() => {
-                  goToSlide(currentIndex + 1);
-              }, 5000);
-
-              testimonialsContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-              testimonialsContainer.addEventListener('mouseleave', () => {
-                   autoSlideInterval = setInterval(() => {
-                      goToSlide(currentIndex + 1);
-                  }, 5000);
-              });
-
-              updateDots();
-            }
+            // This section is now irrelevant to the new design but kept for other sections
         }
       });
 
