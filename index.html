@@ -1197,37 +1197,40 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
       });
-       // Contact Form Script
+      
+      // Contact Form Script
       document.addEventListener("DOMContentLoaded", function () {
-        const contactForm = document.getElementById("contact-form");
-        if(contactForm) {
-            contactForm.addEventListener("submit", function (e) {
-              e.preventDefault();
-              const name = document.getElementById("name").value;
-              
-              const submitButton = contactForm.querySelector('button[type="submit"]');
-              const originalButtonText = submitButton.innerText;
-              submitButton.innerText = '...';
-              submitButton.disabled = true;
+  const contactForm = document.getElementById("contact-form");
+  if(contactForm) {
+      contactForm.addEventListener("submit", function (e) {
+        // لا تمنع الإرسال!
+        // e.preventDefault();
 
-              setTimeout(() => {
-                const notification = document.createElement('div');
-                notification.className = 'fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg animate-pulse';
-                notification.textContent = `شكراً لك ${name}! تم استلام رسالتك.`;
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                     notification.remove();
-                }, 4000);
+        // عرض رسالة الشكر بعد فترة (لكن هذا قد يظهر قبل الإرسال الفعلي)
+        const name = document.getElementById("name").value;
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerText;
+        submitButton.innerText = '...';
+        submitButton.disabled = true;
 
-                submitButton.innerText = originalButtonText;
-                submitButton.disabled = false;
-                contactForm.reset();
-              }, 1500);
+        // انتظر 2 ثانية مثلاً قبل إعادة تفعيل الزر
+        setTimeout(() => {
+          const notification = document.createElement('div');
+          notification.className = 'fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg animate-pulse';
+          notification.textContent = `شكراً لك ${name}! تم استلام رسالتك.`;
+          document.body.appendChild(notification);
+          
+          setTimeout(() => {
+               notification.remove();
+          }, 4000);
 
-            });
-        }
+          submitButton.innerText = originalButtonText;
+          submitButton.disabled = false;
+          contactForm.reset();
+        }, 2000);
       });
+  }
+});
     </script>
   </body>
 </html>
