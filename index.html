@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Pacifico&display=swap"
       rel="stylesheet"
     />
     <link
@@ -21,38 +21,76 @@
       :root {
         --font-ar: 'Cairo', sans-serif;
         --font-en: 'Inter', sans-serif;
+        --primary-color: #003566;
+        --secondary-color: #FF6C0A;
+        --hero-bg-color: #0d2434;
       }
       body {
         font-family: var(--font-ar);
         scroll-behavior: smooth;
+        background-color: #f8fafc;
       }
       html[lang="en"] body {
         font-family: var(--font-en);
       }
-      .font-pacifico {
+       .font-pacifico {
         font-family: 'Pacifico', cursive;
-      }
-      .hero-bg {
-        background-color: #f8fafc;
       }
       .nav-link {
         position: relative;
         transition: color 0.3s ease;
+        padding-bottom: 4px;
       }
       .nav-link::after {
         content: '';
         position: absolute;
         width: 0;
         height: 2px;
-        bottom: -4px;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #FF6C0A;
+        background-color: var(--secondary-color);
         transition: width 0.3s ease;
       }
-      .nav-link:hover::after {
+      .nav-link:hover, .nav-link.active {
+        color: var(--secondary-color);
+      }
+      .nav-link:hover::after, .nav-link.active::after {
         width: 100%;
       }
+      
+      .hero-section {
+        background-color: var(--hero-bg-color);
+        background-image: url('/bg-hereo1.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(1, 22, 39, 0.8);
+        z-index: 1;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-tag {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+      .hero-tag:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      
       .service-card, .tool-card, .brand-logo {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
@@ -60,23 +98,23 @@
         transform: translateY(-8px);
       }
        .service-card:hover, .tool-card:hover {
-         box-shadow: 0 10px 25px rgba(0, 53, 102, 0.1);
-       }
+        box-shadow: 0 10px 25px rgba(0, 53, 102, 0.1);
+      }
       .portfolio-item {
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease-in-out;
-        display: block; /* Ensure it's visible by default */
+        display: block;
       }
-       .portfolio-item.hidden {
-        transform: scale(0.8);
-        opacity: 0;
-        width: 0 !important;
-        height: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        overflow: hidden;
-        display: none; /* Hide completely */
+      .portfolio-item.hidden {
+       transform: scale(0.8);
+       opacity: 0;
+       width: 0 !important;
+       height: 0 !important;
+       padding: 0 !important;
+       margin: 0 !important;
+       overflow: hidden;
+       display: none;
       }
       .portfolio-overlay {
         position: absolute;
@@ -99,30 +137,13 @@
         opacity: 1;
         transform: translateY(0);
       }
-      input:focus,
-      textarea:focus {
-        border-color: #FF6C0A;
-        box-shadow: 0 0 0 3px rgba(255, 108, 10, 0.2);
-      }
-      .social-icon {
-        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-      }
-      .social-icon:hover {
-        transform: translateY(-3px);
-        background-color: #003566;
-        color: white;
-      }
-      .portfolio-filter-btn.active {
-        background-color: #003566;
-        color: white;
-      }
       .faq-answer {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
       }
       .faq-item.open .faq-answer {
-        max-height: 200px; /* Adjust as needed */
+        max-height: 200px;
         padding-top: 1rem;
       }
       .faq-item.open .faq-icon {
@@ -131,7 +152,14 @@
       .faq-icon {
         transition: transform 0.3s ease;
       }
-
+      .social-icon {
+        transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+      }
+      .social-icon:hover {
+        transform: translateY(-3px);
+        background-color: var(--primary-color);
+        color: white;
+      }
       /* Custom Tailwind Config */
       .text-primary { color: #003566; }
       .bg-primary { background-color: #003566; }
@@ -147,37 +175,28 @@
       /* Directional Margin/Padding */
       html[dir="rtl"] .ml-3 { margin-right: 0.75rem; margin-left: 0; }
       html[dir="ltr"] .mr-3 { margin-left: 0.75rem; margin-right: 0; }
-       html[dir="rtl"] .me-2 { margin-left: 0.5rem; margin-right: 0;}
-       html[dir="ltr"] .me-2 { margin-right: 0.5rem; margin-left:0;}
-       html[dir="rtl"] .me-4 { margin-left: 1rem; margin-right: 0;}
-       html[dir="ltr"] .me-4 { margin-right: 1rem; margin-left:0;}
-       html[dir="rtl"] .text-start { text-align: right; }
-       html[dir="ltr"] .text-start { text-align: left; }
-
-      /* Testimonial Slider Fix */
-      #testimonials-container {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 100%;
-      }
-      .testimonial-slide {
-        flex: 0 0 100%; /* Ensures each slide takes full width in flex row */
-      }
-      /* IMPORTANT: Ensure the parent of #testimonials-container (the .overflow-hidden div) does NOT have a fixed width or restrict horizontal overflow. It should allow the flex row to work. */
+      html[dir="rtl"] .me-2 { margin-left: 0.5rem; margin-right: 0;}
+      html[dir="ltr"] .me-2 { margin-right: 0.5rem; margin-left:0;}
+      html[dir="rtl"] .me-4 { margin-left: 1rem; margin-right: 0;}
+      html[dir="ltr"] .me-4 { margin-right: 1rem; margin-left:0;}
+      html[dir="rtl"] .text-start { text-align: right; }
+      html[dir="ltr"] .text-start { text-align: left; }
+      html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-right: 1rem; margin-left: 0;}
+      html[dir="ltr"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-left: 1rem; margin-right: 0;}
     </style>
   </head>
-  <body class="bg-white text-gray-800">
+  <body>
     <!-- Navigation -->
     <nav class="fixed w-full bg-white bg-opacity-95 shadow-md z-50">
       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" class="flex items-center">
-          <img
-            src="assets/logos/tx_icon1.png"
+          <!-- <img
+            src="/https://raw.githubusercontent.com/ahmedaltyeb/TAYABX/main/assets/logos/tx_icon1.png"
             alt="TAYABX Logo"
             class="w-10 h-10 ml-3"
-            onerror="this.onerror=null; this.src='https://placehold.co/40x40/003566/ffffff?text=TX';"
-          />
-          <div class="font-pacifico text-primary text-2xl">TAYABX</div>
+            onerror="this.onerror=null; this.src='"
+          /> -->
+          <div class="font-pacifico text-primary text-2xl" data-key="logo">TAYABX</div>
         </a>
         <div class="hidden md:flex items-center gap-x-8">
           <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_about">من أنا</a>
@@ -187,12 +206,14 @@
           <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_blog">المدونة</a>
           <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_testimonials">آراء العملاء</a>
           <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium" data-key="nav_contact">تواصل معي</a>
-           <button id="lang-switcher" class="bg-primary text-white px-3 py-1 rounded-md text-sm font-semibold">EN</button>
         </div>
-        <div class="md:hidden flex items-center">
-          <button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-700">
-            <i class="ri-menu-line ri-lg"></i>
-          </button>
+        <div class="flex items-center gap-x-2">
+            <button id="lang-switcher" title="Change Language" class="flex items-center gap-2 text-gray-700 hover:text-secondary font-medium transition-colors p-2 rounded-lg hover:bg-gray-100">
+                <span id="lang-switcher-icon-container" class="w-6 h-4 block rounded-sm overflow-hidden"></span>
+            </button>
+            <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
         </div>
       </div>
       <!-- Mobile Menu -->
@@ -201,47 +222,36 @@
           <a href="#about" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_about_mobile">من أنا</a>
           <a href="#services" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_services_mobile">خدماتي</a>
           <a href="#portfolio" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_portfolio_mobile">أعمالي</a>
-           <a href="#tools" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_tools_mobile">الأدوات</a>
-           <a href="#blog" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_blog_mobile">المدونة</a>
+          <a href="#tools" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_tools_mobile">الأدوات</a>
+          <a href="#blog" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_blog_mobile">المدونة</a>
           <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_testimonials_mobile">آراء العملاء</a>
           <a href="#contact" class="text-gray-700 hover:text-primary font-medium py-2" data-key="nav_contact_mobile">تواصل معي</a>
-          <button id="lang-switcher-mobile" class="bg-primary text-white px-3 py-2 rounded-md text-sm font-semibold mx-auto w-24">EN</button>
+          <hr class="my-2">
+          <button id="lang-switcher-mobile" class="text-gray-700 hover:text-primary font-medium py-2 w-full flex items-center justify-center gap-2">
+            <span id="lang-switcher-mobile-icon-container" class="w-6 h-4 block rounded-sm overflow-hidden"></span>
+            <span data-key="nav_switch_lang_mobile">تغيير اللغة</span>
+          </button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-bg pt-32 pb-0 md:pt-40">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center md:items-end gap-12">
-                <!-- Text Content -->
-                <div class="md:w-3/5 text-center md:text-start pb-20 md:pb-28">
-                    <p class="text-secondary font-semibold text-lg md:text-xl mb-4" data-key="hero_welcome">
-                        أهلاً بك في عالم TAYABX
-                    </p>
-                    <h1 class="text-primary text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" data-key="hero_title">
-                        أنا أحمد الطيب، مسوق رقمي أساعد العلامات التجارية على النمو
-                    </h1>
-                    <p class="text-gray-600 text-lg md:text-xl mb-10 max-w-2xl mx-auto md:mx-0" data-key="hero_subtitle">
-                        أركز على الاستراتيجية، التصميم، والنتائج عبر منصات التواصل الاجتماعي ومحركات البحث. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#portfolio" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-lg whitespace-nowrap" data-key="hero_cta1">
-                            شاهد أعمالي
-                        </a>
-                        <a href="#contact" class="bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-secondary hover:text-white transition-all shadow-lg whitespace-nowrap" data-key="hero_cta2">
-                            تواصل معي
-                        </a>
-                    </div>
-                </div>
-                <!-- Image -->
-                <div class="md:w-2/5 flex justify-center md:justify-end">
-                    <div class="relative w-80 h-96 md:w-96 md:h-[32rem]">
-                       <div class="absolute top-10 right-10 w-48 h-48 bg-purple-200 rounded-full opacity-50"></div>
-                       <div class="absolute bottom-10 left-10 w-24 h-24 bg-purple-200 rounded-full opacity-50"></div>
-                        <img src="assets/profile-imgs/re-tayab1.png" alt="Ahmed Eltyeb Khalifa" class="relative z-10 w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/400x500/e2e8f0/334155?text=Profile+Image';">
-                    </div>
-                </div>
+    <section id="hero" class="hero-section h-screen min-h-[700px] flex items-center justify-center text-center">
+        <div class="hero-content container mx-auto px-6 text-white">
+            <p class="text-secondary font-semibold text-lg md:text-xl mb-4" data-key="hero_welcome">
+                أهلاً بك في عالم TAYABX
+            </p>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight" data-key="hero_title">
+                أنا أحمد الطيب، مسوق رقمي ومصمم مواقع
+            </h1>
+            <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300" data-key="hero_subtitle">
+                أركز على الاستراتيجية، التصميم، والنتائج. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-3 md:gap-4">
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag1">تصميم مواقع وتطبيقات</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag2">تسويق إلكتروني</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag3">تحسين محركات البحث (SEO)</span>
+                <span class="hero-tag rounded-full px-5 py-2" data-key="hero_tag4">إدارة حسابات التواصل</span>
             </div>
         </div>
     </section>
@@ -862,7 +872,8 @@
             </div>
         </div>
     </section>
-
+    
+     <!-- footer -->
     <footer class="bg-primary py-12">
       <div class="container mx-auto px-6 text-center">
          <a href="#" class="flex items-center justify-center mb-4">
@@ -897,7 +908,7 @@ const translations = {
         page_title: "TAYABX - صياغة النجاح الرقمي",
         nav_about: "من أنا", nav_services: "خدماتي", nav_portfolio: "أعمالي", nav_blog: "المدونة", nav_testimonials: "آراء العملاء", nav_contact: "تواصل معي", nav_tools: "الأدوات",
         nav_about_mobile: "من أنا", nav_services_mobile: "خدماتي", nav_portfolio_mobile: "أعمالي", nav_blog_mobile: "المدونة", nav_testimonials_mobile: "آراء العملاء", nav_contact_mobile: "تواصل معي", nav_tools_mobile: "الأدوات",
-        hero_welcome: "أهلاً بك في عالم TAYABX", hero_title: "أنا أحمد الطيب، مسوق رقمي أساعد العلامات التجارية على النمو", hero_subtitle: "أركز على الاستراتيجية، التصميم، والنتائج عبر منصات التواصل الاجتماعي ومحركات البحث. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.", hero_cta1: "شاهد أعمالي", hero_cta2: "تواصل معي",
+        hero_welcome: "أهلاً بك في عالم TAYABX", hero_title: " مسوق رقمي أساعد العلامات التجارية على النمو", hero_subtitle: "أركز على الاستراتيجية، التصميم، والنتائج عبر منصات التواصل الاجتماعي ومحركات البحث. أحول وجودك الرقمي إلى نمو تجاري قابل للقياس.", hero_cta1: "شاهد أعمالي", hero_cta2: "تواصل معي",
         about_title: "من أنا؟", about_subtitle: "نظرة سريعة على خبراتي وشغفي في عالم التسويق الرقمي.", about_headline: "متخصص في التسويق الرقمي وتنمية العلامات التجارية", about_p1: "بخبرة تزيد عن 3 سنوات في المشهد الرقمي في الإمارات العربية المتحدة، ساعدت العديد من الشركات على تأسيس وجود قوي عبر الإنترنت. يجمع نهجي بين الاستراتيجيات القائمة على البيانات والتنفيذ الإبداعي لتقديم نتائج قابلة للقياس تتماشى مع أهداف العمل. كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات. كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات.", about_p2: "كمؤسس لـ TAYABX، أعمل عن كثب مع العملاء لفهم تحدياتهم الفريدة وتطوير حلول تسويق رقمية مخصصة تدفع النمو والمشاركة والتحويلات.", about_expertise_title: "مجالات خبرتي:", skill1: "التسويق عبر السوشيال ميديا", skill2: "تحسين محركات البحث (SEO)", skill3: "إعلانات جوجل", skill4: "تصميم الجرافيك", skill5: "Canva", skill6: "Figma",
         tools_title: "الأدوات والنظام", tools_subtitle: "أستخدم أحدث الأدوات والأنظمة لضمان أفضل النتائج.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush",
         brands_title: "علامات تجارية تعاونت معها", brands_subtitle: "نفخر بالثقة التي منحنا إياها هؤلاء الشركاء المميزون.",
@@ -924,7 +935,7 @@ const translations = {
         page_title: "TAYABX - Crafting Digital Success",
         nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio", nav_blog: "Blog", nav_testimonials: "Testimonials", nav_contact: "Contact", nav_tools: "Tools",
         nav_about_mobile: "About", nav_services_mobile: "Services", nav_portfolio_mobile: "Portfolio", nav_blog_mobile: "Blog", nav_testimonials_mobile: "Testimonials", nav_contact_mobile: "Contact", nav_tools_mobile: "Tools",
-        hero_welcome: "Welcome to the world of TAYABX", hero_title: "I'm Ahmed Eltyeb, a Digital Marketer Helping Brands Grow", hero_subtitle: "Focused on strategy, design & results across social platforms and search engines. Transforming digital presence into measurable business growth.", hero_cta1: "View My Work", hero_cta2: "Contact Me",
+        hero_welcome: "Welcome to the world of TAYABX", hero_title: "Digital Marketer Helping Brands Grow", hero_subtitle: "Focused on strategy, design & results across social platforms and search engines. Transforming digital presence into measurable business growth.", hero_cta1: "View My Work", hero_cta2: "Contact Me",
         about_title: "Who I Am", about_subtitle: "A quick look at my experience and passion in the world of digital marketing.", about_headline: "Digital Marketing & Brand Growth Specialist", about_p1: "With over 3 years of experience in the UAE's digital landscape, I have helped numerous businesses establish a strong online presence. My approach combines data-driven strategies with creative execution to deliver measurable results that align with business goals.", about_p2: "As the founder of TAYABX, I work closely with clients to understand their unique challenges and develop customized digital marketing solutions that drive growth, engagement, and conversions.", about_expertise_title: "My Expertise:", skill1: "Social Media Marketing", skill2: "Search Engine Optimization (SEO)", skill3: "Google Ads", skill4: "Graphic Design", skill5: "Canva", skill6: "Figma",
         tools_title: "Tools & System", tools_subtitle: "I use the latest tools and systems to ensure the best results.", tool_ps: "Adobe Photoshop", tool_lr: "Lightroom CC", tool_asana: "Asana", tool_capcut: "Capcut", tool_semrush: "Semrush",
         brands_title: "Brands I've Collaborated With", brands_subtitle: "We are proud of the trust given to us by these distinguished partners.",
